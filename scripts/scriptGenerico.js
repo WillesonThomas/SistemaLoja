@@ -9,8 +9,8 @@ $(document).ready(function () {
     });
 
     cadastrarProduto();
-    cadastrarPessoa();
-    cadastrarPedido();
+    cadastrarDocumentoVenda();
+//    cadastrarPedido();
     paginaLogin();
 });
 
@@ -96,80 +96,18 @@ function cadastrarProduto() {
 
 }
 
-function cadastrarPessoa() {
+function cadastrarDocumentoVenda() {
 
-    $("#campoNomePessoa").blur(function () {
-        validarDadoNaoNumerico("#campoNomePessoa", "alertaNomePessoa", "Informe somente letras no campo 'Nome Pessoa'");
+    $("#campoCodigoDocumentoVenda").blur(function () {
+        validarDadoNumerico("#campoCodigoDocumentoVenda", "alertaCodigoDocumentoVenda", "Informe somente numeros no campo 'Numero'");
     });
 
-    $("#campoCPF").blur(function () {
-        validarDadoNumerico("#campoCPF", "alertaCPF", "Informe somente numeros no campo 'CPF'");
+    $("#campoTotalDocumentoVenda").blur(function () {
+        validarDadoNumerico("#campoTotalDocumentoVenda", "alertaTotalDocumentoVenda", "Informe somente numeros no campo 'Total'");
     });
 
-    $("#campoLogradouro").blur(function () {
-        validarDadoNaoNumerico("#campoLogradouro", "alertaLogradouro", "Informe somente letras no campo 'Logradouro'");
-    });
-
-    $("#campoNumero").blur(function () {
-        validarDadoNumerico("#campoNumero", "alertaNumero", "Informe somente numeros no campo 'Numero'");
-    });
-
-    $("#campoBairro").blur(function () {
-        validarDadoNaoNumerico("#campoBairro", "alertaBairro", "Informe somente letras no campo 'Bairro'");
-    });
-
-    $("#campoCidade").blur(function () {
-        validarDadoNaoNumerico("#campoCidade", "alertaCidade", "Informe somente letras no campo 'Cidade'");
-    });
-
-    $("#campoCep").blur(function () {
-        //Nova variável "cep" somente com dígitos.
-        var cep = $(this).val().replace(/\D/g, '');
-        debugger;
-        if (cep != '') {
-            var validacep = /^[0-9]{8}$/;
-            if(validacep.test(cep)) {
-                //Preenche os campos com "..." enquanto consulta webservice.
-                $("#campoLogradouro").val("...");
-                $("#campoBairro").val("...");
-                $("#campoCidade").val("...");
-                $("#campoEstado").val("...");
-
-                //Consulta o webservice viacep.com.br/
-                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-
-                    if (!("erro" in dados)) {
-                        //Atualiza os campos com os valores da consulta.
-                        $("#campoLogradouro").val(dados.logradouro);
-                        $("#campoBairro").val(dados.bairro);
-                        $("#campoCidade").val(dados.localidade);
-                        $("#campoEstado").val(dados.uf);
-                    } //end if.
-                    else {
-                        //CEP pesquisado não foi encontrado.
-                        $("#campoLogradouro").val(null);
-                        $("#campoBairro").val(null);
-                        $("#campoCidade").val(null);
-                        $("#campoEstado").val(null);
-                    }
-                });
-            } //end if.
-            else {
-                //cep é inválido.
-                validarCep('#campoCep', 'alertCep', 'CEP informado é inválido');
-            }
-        } //end if.
-        else {
-            validarCep('#campoCep', 'alertCep', 'CEP informado é inválido');
-        }        
-    });
-
-    $("#campoEstado").blur(function () {
-        validarDadoNaoNumerico("#campoEstado", "alertaEstado", "Informe somente letras no campo 'Estado'");
-    });
-
-    $("#campoDesconto").blur(function () {
-        validarDadoNumerico("#campoDesconto", "alertaDesconto", "Informe somente numeros no campo 'Desconto'");
+    $("#campoSituacaoDocumentoVenda").blur(function () {
+        validarDadoNaoNumerico("#campoSituacaoDocumentoVenda", "alertaSituacaoDocumentoVenda", "Informe somente letras no campo 'Situacao'");
     });
 
 }

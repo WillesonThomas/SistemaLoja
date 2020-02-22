@@ -33,13 +33,13 @@ class PersistenciaDocumentoVenda {
     }
 
     public function insert(DocumentoVenda $docVenda) {
-        Persistencia::insertBD("TBDOCUMENTO", ['DOCCODIGO','DOCTOTAL', 'DOCCONFIRMADO'],
-                [$docVenda->getCodigoVenda(), $docVenda->getTotal(), $docVenda->getConfirmado()]);
+        Persistencia::insertBD("TBDOCUMENTO", ['DOCCODIGO','DOCTOTAL', 'DOCSITUACAO'],
+                [$docVenda->getCodigoVenda(), $docVenda->getTotal(), $docVenda->getSituacao()]);
     }
 
     public function update(DocumentoVenda $docVenda) {
         Persistencia::updateBD("TBDOCUMENTO",
-                ['DOCTOTAL=' . $docVenda->getTotal(),'DOCCONFIRMADO=' . $docVenda->getConfirmado()],
+                ['DOCTOTAL=' . $docVenda->getTotal(),'DOCSITUACAO=' . $docVenda->getSituacao()],
                  'DOCCODIGO=' . $docVenda->getCodigoVenda());
     }
 
@@ -48,7 +48,7 @@ class PersistenciaDocumentoVenda {
     }
 
     public function selectDocumentoVenda($condicao=null) {
-        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL','TBDOCUMENTO.DOCCONFIRMADO'];
+        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL','TBDOCUMENTO.DOCSITUACAO'];
         $this->tabela = 'TBDOCUMENTO';
         if($condicao){
             $this->condicao = 'TBDOCUMENTO.DOCCODIGO='.$condicao;

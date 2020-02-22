@@ -24,20 +24,15 @@
         $get = '';
         if (isset($_GET['pg'])) {
             switch (($_GET['pg'])) {
-                case "ViewPessoa":
-                    require_once './controller/ControllerPessoa.inc'; //encerra se não achar
-                    $get = './controller/ControllerPessoa';
-                    $oPessoa = new ControllerPessoa();
-                    break;
                 case "ViewProduto":
                     require_once './controller/ControllerProduto.inc'; //encerra se não achar
                     $get = './controller/ControllerProduto';
                     $oProduto = new ControllerProduto();
                     break;
-                case "ViewPedido":
-                    require_once './controller/ControllerPedido.inc'; //encerra se não achar
-                    $get = './controller/ControllerPedido';
-                    $oPedido = new ControllerPedido();
+                case "ViewDocumentoVenda":
+                    require_once './controller/ControllerDocumentoVenda.inc'; //encerra se não achar
+                    $get = './controller/ControllerDocumentoVenda';
+                    $oDocumentoVenda = new ControllerDocumentoVenda();
                     break;
                 default:
                     break;

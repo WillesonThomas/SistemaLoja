@@ -18,6 +18,7 @@ class ControllerDocumentoVenda {
     private $ViewDocumentoVenda;
 
     public function __construct() {
+        echo 'oi';
         $this->processarDados();
     }
 
@@ -31,54 +32,47 @@ class ControllerDocumentoVenda {
 
     public function alterar() {
         if ($this->validarCampos()) {
-            $this->getDocumentoVenda()->setCodigoOperacao($_GET['alterar']);
-            $this->getDocumentoVenda()->setCodigoPessoa($_POST['codigoPessoa']);
-            $this->getDocumentoVenda()->setCodigoProduto($_POST['codigoProduto']);
-            $this->getDocumentoVenda()->setQuantidade($_POST['quantidade']);
-            $this->getDocumentoVenda()->setPrecoUnitario($_POST['precoUnitario']);
-            $this->getDocumentoVenda()->setDesconto($_POST['desconto']);
+            $this->getDocumentoVenda()->setCodigoVenda($_GET['alterar']);
+            $this->getDocumentoVenda()->setTotal($_POST['totalDocumentoVenda']);
+            $this->getDocumentoVenda()->setSituacao($_POST['situacaoDocumentoVenda']);
 
             $this->PersistenciaDocumentoVenda->update($this->DocumentoVenda);
         }
     }
 
     public function deletar() {
-        $this->getDocumentoVenda()->setCodigoOperacao($_GET['deletar']);
+        $this->getDocumentoVenda()->setCodigoVenda($_GET['deletar']);
         $this->PersistenciaDocumentoVenda->delete($this->DocumentoVenda);
     }
 
     public function cadastrar() {
         if ($this->validarCampos()) {
-            echo ($_POST['codigoPessoa']);
-            $this->getDocumentoVenda()->setCodigo($_POST['codigoDocumentoVenda']);
-            $this->getDocumentoVenda()->setCodigoPessoa($_POST['codigoPessoa']);
-            $this->getDocumentoVenda()->setCodigoProduto($_POST['codigoProduto']);
-            $this->getDocumentoVenda()->setQuantidade($_POST['quantidade']);
-            $this->getDocumentoVenda()->setPrecoUnitario($_POST['precoUnitario']);
-            $this->getDocumentoVenda()->setDesconto($_POST['desconto']);
+            $this->getDocumentoVenda()->setCodigoVenda($_GET['alterar']);
+            $this->getDocumentoVenda()->setTotal($_POST['totalDocumentoVenda']);
+            $this->getDocumentoVenda()->setSituacao($_POST['situacaoDocumentoVenda']);
 
             $this->PersistenciaDocumentoVenda->insert($this->DocumentoVenda);
         }
     }
 
-    public function validarDocumentoVenda() {
-        $listaDocumentoVendas = $this->PersistenciaDocumentoVenda->selectDocumentoVenda();
-        if (sizeof($listaDocumentoVendas) != 0) {
-            foreach ($listaDocumentoVendas as $value) {
-                if (($_POST['codigoDocumentoVenda']) == $value[6]) {
-                    if(($_POST['codigoPessoa']) == $value[2]){
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        } else {           
-        return true;
-        }
-
-    }
+//    public function validarDocumentoVenda() {
+//        $listaDocumentoVendas = $this->PersistenciaDocumentoVenda->selectDocumentoVenda();
+//        if (sizeof($listaDocumentoVendas) != 0) {
+//            foreach ($listaDocumentoVendas as $value) {
+//                if (($_POST['codigoDocumentoVenda']) == $value[6]) {
+//                    if(($_POST['codigoPessoa']) == $value[2]){
+//                        return true;
+//                    } else {
+//                        return false;
+//                    }
+//                }
+//            }
+//            return true;
+//        } else {           
+//        return true;
+//        }
+//
+//    }
 
     public function validarCampos() {
         if (isset($_POST['codigoVenda']) and isset($_POST['totalVenda']) and ! empty($_POST['situacaoVenda'])) {
