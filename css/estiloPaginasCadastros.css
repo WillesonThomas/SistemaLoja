@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+/*--------------------------------Menu--------------------------------*/
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .subnav:hover{
+  background-color: #0086C3;
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #0086C3;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}
+
+
+#sessao {
+  color: white;
+  text-decoration: none; 
+  float: right;
+}
+
+/*--------------------------------Formulário--------------------------------*/
+#formulario {
+  width: 40%; 
+  height: auto;
+  margin: auto;
+  background-color: black;
+  margin-top: 3.5%;
+  margin-bottom: 3.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 20px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.campoText{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  background-color: #ddd;
+  outline: none;        
+}
+
+.campoSelect{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  background-color: #ddd;
+  outline: none;        
+}
+
+
+.textArea{
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  background-color: #ddd;
+  outline: none;        
+    width: 100%;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.btnCadastrar {
+    background-color: #387932;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btnLimpar:hover {
+  opacity: 1;
+}
+.btnLimpar {
+  background-color: #0086C3;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btnCadastrar:hover {
+  opacity: 1;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+.imagemalertasmall{
+    display: none;
+    width: 16px;
+    height: 16px;
+}
+
+/*Mensagem de aviso azul*/
+#divAvisoAlerta {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 20%;
+    margin-right: auto;  
+    height: auto;
+    background-color: orange;
+    padding: 40px;
+    border-radius: 15px;
+    color: #404040;
+    font-family: Calibri;
+    font-size: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+}
+
+#divAvisoErro {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 20%;
+    margin-right: auto;  
+    height: auto;
+    background-color: red;
+    padding: 40px;
+    border-radius: 15px;
+    color: white;
+    font-family: Calibri;
+    font-size: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+}
+
+#divAvisoSucesso {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 20%;
+    margin-right: auto;  
+    height: auto;
+    background-color: springgreen;
+    padding: 40px;
+    border-radius: 15px;
+    color: #404040;
+    font-family: Calibri;
+    font-size: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+}
+
+#divInfo {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    width: 20%;
+    margin-left: 40%;
+    margin-top: 20%;
+    margin-right: auto;  
+    height: auto;
+    background-color: #ccd4ff;
+    padding: 40px;
+    border-radius: 15px;
+    color: #404040;
+    font-family: Calibri;
+    font-size: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
+}
+
+.fechar{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #404040;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+.fechar:hover,
+.fechar:focus {
+    color: red;
+    cursor: pointer;
+}
+.imagemAviso{
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin: auto;
+}
+
+.mensagem{
+    margin: auto;
+    display: block;
+}
+
+.conteudoAviso {
+    text-align: center;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+/*--------------------------------Imagem centro--------------------------------*/
+.containerBanner {
+  position: relative;
+  text-align: center;
+  color: white;
+  height: 340px;
+  background-image: url("../imagens/wallpapermenu.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#ImgBanner{
+    width: 100%;
+}
+
+/*--------------------------------Grade de Imagens--------------------------------*/
+* {
+  box-sizing: border-box;
+}
+
+#divGradeImg {
+  margin: 0;
+  height: 450px;
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row {
+    width: 80%;
+    margin: auto;
+}
+
+/* The expanding image container */
+.containerTabelaImagens {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+/*--------------------------------Tabela de Listagem--------------------------------*/
+
+.table_listagem {
+    border: none;
+    background-color: #d8dada;
+    width: 95%;
+    margin: auto;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+.table_listagem tr th {
+    background-color: #454748;
+    color: #EEF4F2;
+}
+
+.table_listagem tr td,th {
+    padding: 5px;
+    text-align: center;
+}
+
+footer {
+   width: 100%;
+   background-color: #333;
+   color: white;
+   text-align: center;
+   padding-top: 20px;
+   padding-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5, p, a{
+    font-family: 'Roboto', sans-serif;
+}
+
+.menu-grid {
+    margin-top: 61px;
+    width: 100%;
+    height: 300px;
+}
+
+.menu-column{
+    height: 100%;
+    text-align: center;
+    width: 33.3%;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-column a{
+    width: 100%;
+    height: 100%;
+}
+
+.menu-column a img{
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.sub-container{
+    padding: 50px;
+    background-color: white;
+    width: 100%;
+}
+
+.iconesacoes{
+    margin: 2px;
+}
+
+.iconesacoes:hover{
+    opacity: 0.8;
+}
