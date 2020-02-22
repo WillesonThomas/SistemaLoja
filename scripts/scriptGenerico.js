@@ -97,20 +97,37 @@ function cadastrarProduto() {
 }
 
 function cadastrarDocumentoVenda() {
-
-    $("#campoCodigoDocumentoVenda").blur(function () {
-        validarDadoNumerico("#campoCodigoDocumentoVenda", "alertaCodigoDocumentoVenda", "Informe somente numeros no campo 'Numero'");
+    $("#buscarProduto").on('click',function (e) {
+        e.preventDefault();
+        var $produto = $("#campoCodigoProdutoDocumentoVenda").val();
+        $.ajax({
+            url: 'ajax.php',
+            type: 'POST',
+            dataType: "json",
+            data: {codigoProdutoVenda: $produto},
+            success: function (data) {
+                debugger;
+                createTable(data);
+            }, error: function () {
+                $("#campoDesconto").html("Erro ao carregar");   
+                window.alert('oi');
+            }
+        });
     });
 
-    $("#campoTotalDocumentoVenda").blur(function () {
-        validarDadoNumerico("#campoTotalDocumentoVenda", "alertaTotalDocumentoVenda", "Informe somente numeros no campo 'Total'");
-    });
-
-    $("#campoSituacaoDocumentoVenda").blur(function () {
-        validarDadoNaoNumerico("#campoSituacaoDocumentoVenda", "alertaSituacaoDocumentoVenda", "Informe somente letras no campo 'Situacao'");
+    $("#campoCodigoProdutoDocumentoVenda").blur(function () {
+        validarDadoNumerico("#campoCodigoProdutoDocumentoVenda", "alertaCodigoProdutoDocumentoVenda", "Informe somente numeros no campo 'Numero'");
     });
 
 }
+
+function createTable(items) {
+        var rows = "";
+        for (var i = 0; i < items.length; i++) {
+            rows += "<tr><td>" + items[i][0] + "</td><td>" + items[i][1] + "</td><td>" + items[i][2]+"</td>";
+        }
+        $(rows).appendTo("#itemList tbody");
+    }
 
 function validarCep(idCampo, alertaCampo, mensagemCampo) {
     if ($(idCampo).val() == "" || isNaN($(idCampo).val())) {
@@ -118,8 +135,7 @@ function validarCep(idCampo, alertaCampo, mensagemCampo) {
         $("#" + alertaCampo).fadeIn("slow");
         $(idCampo).css("borderBottom", "solid red");
         avisoErro(mensagemCampo);
-    } 
-    else {
+    } else {
         document.getElementById(alertaCampo).src = "imagens/icones/success.png";
         $("#" + alertaCampo).fadeIn("fast");
         $(idCampo).css("borderBottom", "solid gray");
@@ -127,17 +143,17 @@ function validarCep(idCampo, alertaCampo, mensagemCampo) {
 }
 
 function cadastrarPedido() {
-    
+
     $("#campoCodigoPessoa").blur(function () {
         var $pessoa = $("#campoCodigoPessoa").val();
         $.ajax({
             url: 'ajax.php',
             type: 'POST',
-            data: {codigoPessoa:$pessoa},
+            data: {codigoPessoa: $pessoa},
             success: function (data) {
-               $("#campoDesconto").val(data); 
-            }, error: function() {
-               $("#campoDesconto").html("Erro ao carregar");                 
+                $("#campoDesconto").val(data);
+            }, error: function () {
+                $("#campoDesconto").html("Erro ao carregar");
             }
         });
     });
@@ -147,11 +163,11 @@ function cadastrarPedido() {
         $.ajax({
             url: 'ajax.php',
             type: 'POST',
-            data: {codigoProduto:$produto},
+            data: {codigoProduto: $produto},
             success: function (data) {
-               $("#campoPrecoUnitario").val(data); 
-            }, error: function() {
-               $("#campoPrecoUnitario").html("Ocorreu um Erro!");                 
+                $("#campoPrecoUnitario").val(data);
+            }, error: function () {
+                $("#campoPrecoUnitario").html("Ocorreu um Erro!");
             }
         });
     });

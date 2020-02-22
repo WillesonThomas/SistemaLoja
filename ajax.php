@@ -1,29 +1,17 @@
 <?php
 
-require_once './Persistencia/Persistencia.inc';
+require_once './persistencia/Persistencia.inc';
 
-if (isset($_POST['codigoPessoa'])) {
-    selectPessoa($_POST['codigoPessoa']);
-}
-
-if (isset($_POST['codigoProduto'])) {
-    selectProduto($_POST['codigoProduto']);
-}
-
-function selectPessoa($valor) {
-    $atributos = ['TBPESSOA.PESDESCONTO'];
-    $tabela = 'LOJAINFORMATICA.TBPESSOA';
-    $condicao = 'TBPESSOA.PESCODIGO=' . $valor;
-    $select = Persistencia::selectecBD($atributos, $tabela, $condicao);
-    echo $select[0][0];
+if (isset($_POST['codigoProdutoVenda'])) {
+    selectProduto($_POST['codigoProdutoVenda']);
 }
 
 function selectProduto($valor) {
-    $atributos = ['TBPRODUTO.PROPRECOVENDA'];
-    $tabela = 'LOJAINFORMATICA.TBPRODUTO';
+    $atributos = ['*'];
+    $tabela = 'TBPRODUTO';
     $condicao = 'TBPRODUTO.PROCODIGO=' . $valor;
     $select = Persistencia::selectecBD($atributos, $tabela, $condicao);
-    echo $select[0][0];
+    echo json_encode($select);
 }
 ?>
 

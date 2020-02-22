@@ -172,6 +172,7 @@ class Estrutura {
         }
     }
 
+
     public static function criarSelect($idAlerta, $name, $label, $id, $lista, $verifica = null, $verificaAlterar = null) {
         echo '<img src="imagens/icones/error.png" id="' . $idAlerta . '" class="imagemalertasmall"/>'
         . '<label for="' . $name . '"><b>' . $label . '*</b></label>';
@@ -242,6 +243,21 @@ class Estrutura {
         }
         echo '</tbody>';
         echo '</table>';
+    }
+    
+    public static function montaTabelaJs() {
+        echo '<br>';
+        echo '<table border="1" class="table_listagem" id="itemList">
+            <thead>
+                <tr>
+                    <td>Codigo</td>
+                    <td>Descricao</td>
+                    <td>Preco</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>';
     }
 
 }

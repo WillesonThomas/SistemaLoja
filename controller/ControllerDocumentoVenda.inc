@@ -2,7 +2,6 @@
 
 require_once 'model/DocumentoVenda.inc';
 require_once './persistencia/PersistenciaDocumentoVenda.inc';
-require_once './persistencia/PersistenciaPessoa.inc';
 require_once './persistencia/PersistenciaProduto.inc';
 require_once './view/ViewDocumentoVenda.inc';
 
@@ -18,7 +17,6 @@ class ControllerDocumentoVenda {
     private $ViewDocumentoVenda;
 
     public function __construct() {
-        echo 'oi';
         $this->processarDados();
     }
 
@@ -47,7 +45,7 @@ class ControllerDocumentoVenda {
 
     public function cadastrar() {
         if ($this->validarCampos()) {
-            $this->getDocumentoVenda()->setCodigoVenda($_GET['alterar']);
+            $this->getDocumentoVenda()->setCodigoVenda($_POST['codigoDocumentoVenda']);
             $this->getDocumentoVenda()->setTotal($_POST['totalDocumentoVenda']);
             $this->getDocumentoVenda()->setSituacao($_POST['situacaoDocumentoVenda']);
 
@@ -75,7 +73,7 @@ class ControllerDocumentoVenda {
 //    }
 
     public function validarCampos() {
-        if (isset($_POST['codigoVenda']) and isset($_POST['totalVenda']) and ! empty($_POST['situacaoVenda'])) {
+        if (isset($_POST['codigoDocumentoVenda']) and isset($_POST['totalDocumentoVenda']) and ! empty($_POST['situacaoDocumentoVenda'])) {
             return true;
         }
         return false;
@@ -96,34 +94,35 @@ class ControllerDocumentoVenda {
             $selectDocumentoVendas = $this->PersistenciaDocumentoVenda->selectDocumentoVendaTabela();
             foreach ($selectDocumentoVendas as $value) {
              $select = $this->PersistenciaDocumentoVenda->selectDocumentoVenda($value[0]);   
-             $totalDocumentoVenda= $this->PersistenciaDocumentoVenda->calculaTotalDocumentoVenda($value[0]);   
-             $this->ViewDocumentoVenda->criarPaginaDocumentoVendaExibir($select,$totalDocumentoVenda);
+             //$totalDocumentoVenda= $this->PersistenciaDocumentoVenda->calculaTotalDocumentoVenda($value[0]);   
+             $this->ViewDocumentoVenda->criarPaginaDocumentoVendaExibir($select,10);
             }
         } else if (isset($_GET['deletar'])) {
             $selectProduto = $persistenciaProduto->select();
-            $selectPessoa = $persistenciaDocumetoVenda->select();
-            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaCadastrar($selectPessoa, $selectProduto);
+            $selectDocumentoVenda = $persistenciaDocumetoVenda->selectDocumentoVenda();
+            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaCadastrar($selectDocumentoVenda, $selectProduto);
             $this->deletar();
         } else if (isset($_GET['alterar'])) {
             $this->PersistenciaDocumentoVenda->setCondicao($_GET['alterar']);
             $select = $this->PersistenciaDocumentoVenda->selectDocumentoVenda();
             $selectProduto = $persistenciaProduto->select();
-            $selectPessoa = $persistenciaDocumetoVenda->select();
+            $selectDocumentoVenda = $persistenciaDocumetoVenda->selectDocumentoVenda();
 
-            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaAlterar($select, $selectPessoa, $selectProduto);
+            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaAlterar($select, $selectDocumentoVenda, $selectProduto);
             $this->alterar();
         } else if (isset($_GET['vizualizar'])) {
             $this->PersistenciaDocumentoVenda->setCondicao($_GET['vizualizar']);
             $select = $this->PersistenciaDocumentoVenda->selectDocumentoVenda();
             $selectProduto = $persistenciaProduto->select();
-            $selectPessoa = $persistenciaDocumetoVenda->select();
+            $selectDocumentoVenda = $persistenciaDocumetoVenda->selectDocumentoVenda();
 
-            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaVizualizar($select, $this->verificaPessoa($selectPessoa, $select[0][2]), $this->verificaProduto($selectProduto, $select[0][1]));
+            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaVizualizar($select, $this->verificaPessoa($selectDocumentoVenda, $select[0][2]), $this->verificaProduto($selectProduto, $select[0][1]));
         } else {
             $selectProduto = $persistenciaProduto->select();
-            $selectPessoa = $persistenciaDocumetoVenda->select();
+             echo 'X-debug Willeson';
+            $selectDocumentoVenda = $persistenciaDocumetoVenda->selectDocumentoVenda();
 
-            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaCadastrar($selectPessoa, $selectProduto);
+            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaCadastrar($selectDocumentoVenda, $selectProduto);
             $this->cadastrar();
         }
     }
