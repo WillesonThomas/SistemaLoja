@@ -97,20 +97,21 @@ function cadastrarProduto() {
 }
 
 function cadastrarDocumentoVenda() {
-    $("#buscarProduto").on('click',function (e) {
-        e.preventDefault();
-        var $produto = $("#campoCodigoProdutoDocumentoVenda").val();
+    $("#buscarProduto").on('click',function () {
+        var $produto     = $("#campoCodigoProdutoDocumentoVenda").val();
+        var $codigoVenda = $("#campoCodigoDocumentoVenda").val();
         $.ajax({
             url: 'ajax.php',
             type: 'POST',
             dataType: "json",
-            data: {codigoProdutoVenda: $produto},
+            data: {codigoProdutoVenda: $produto, codigoVenda: $codigoVenda},
             success: function (data) {
-                debugger;
+                if(data.length==0){
+                    avisoErro("Produto Nao Cadastrado");   
+                }
                 createTable(data);
             }, error: function () {
-                $("#campoDesconto").html("Erro ao carregar");   
-                window.alert('oi');
+                $("#campoCodigoProdutoDocumentoVenda").html("Erro ao carregar");   
             }
         });
     });

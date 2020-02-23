@@ -58,7 +58,6 @@ class Persistencia {
             }
         }
         $insert .= $atributos . $valores;
-        echo 'Will:: '.$insert;
         mysqli_query(self::conexao(), $insert);
         mysqli_close(self::conexao());
     }

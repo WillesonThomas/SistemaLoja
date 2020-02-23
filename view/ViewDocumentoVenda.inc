@@ -5,7 +5,8 @@ require_once './model/Estrutura.inc'; //encerra se não achar
 class ViewDocumentoVenda {
     
       public function criarPaginaDocumentoVendaCadastrar($selectPessoa,$selectProduto) {
-        Estrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewDocumentoVenda", "Cadastro de Venda Numero: ".'423');
+        Estrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewDocumentoVenda", "Cadastro de Venda");
+        Estrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Codigo da Venda", "campoCodigoDocumentoVenda", "text", "11",40,false, false, true);
         Estrutura::criarInput("alertaCodigoProdutoDocumentoVenda", "codigoProdutoDocumentoVenda", "Codigo", "campoCodigoProdutoDocumentoVenda", "text", "11");
         Estrutura::criarBotao("button", "BUSCAR", "buscarProduto");
         Estrutura::montaTabelaJs();

@@ -132,7 +132,7 @@ class Estrutura {
             <?php
     }
 
-    public static function criarFormulario($acaoFormulario, $tituloFormulario, $method = null) {
+    public static function criarFormulario($acaoFormulario, $tituloFormulario, $method = false) {
         echo '<div id="formulario"><div class="container">';
         if ($method) {
             echo '<form action="' . $acaoFormulario . '" method="GET">';
@@ -142,7 +142,7 @@ class Estrutura {
         echo '<h1>' . $tituloFormulario . '</h1><hr>';
     }
 
-    public static function criarInput($idAlerta, $name, $label, $idCampo, $typeCampo, $tamanhoMax, $value = null, $desabilitar = null,$verifica = null) {
+    public static function criarInput($idAlerta, $name, $label, $idCampo, $typeCampo, $tamanhoMax, $value = null, $desabilitar = null,$verifica = null, $readOnly = null) {
         echo '<img src="imagens/icones/error.png" id="' . $idAlerta . '" class="imagemalertasmall"/>'
         . '<label for="' . $name . '"><b>' . $label . '*</b></label>';
         if ($desabilitar) {
@@ -150,6 +150,8 @@ class Estrutura {
         } else {
             if ($value == null) {
                 echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" required>';
+            } else if($readOnly != null and $value != null) {
+                echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" value="' . $value . '" readonly="readonly" required>';
             } else {
                 echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" value="' . $value . '" required>';
             }

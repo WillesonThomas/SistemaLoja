@@ -32,10 +32,10 @@ class PersistenciaItemVenda {
         $this->condicao = "TBITEM.DOCCODIGO=" . $condicao;
     }
 
-    public function insert(Produto $produto) {
+    public function insert(DocumentoVenda $oDocumento,Produto $produto) {
         Persistencia::insertBD("TBITEM",
-                ['PRODESCRICAO', 'PROFABRICANTE','PROPRECOVENDA'],
-                ['\'' . $produto->getDescricao() . '\'', '\'' .$produto->getFabricante(). '\'',$produto->getPrecoVenda()]);
+                ['DOCCODIGO', 'PROCODIGO'],
+                [$oDocumento->getCodigoVenda(), $produto->getCodigo()]);
     }
 
 //    public function update(Produto $produto) {
