@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Persistencia
+ * @package persistencia
+ * @author Willeson Thomas da Silva <will.thomassilva@gmail.com>
+ */
 class Persistencia {
 
+    /**
+     * Realiza a conexão com o banco de dados
+     */
     private static function conexao() {
         $sHost = 'localhost';
         $sPort = '3306';
@@ -16,6 +24,12 @@ class Persistencia {
         return $sConexao;
     }
 
+    /**
+     * Realiza a select no banco com base nos parâmetros 
+     * @param Array   $arrayAtributos
+     * @param Array   $elementosTabela
+     * @param boolean $condicao
+     */
     public static function selectecBD($arrayAtributos, $elementosTabela, $condicao = null) {
         $select = ' ';
         $atributos = ' SELECT ';
@@ -37,6 +51,12 @@ class Persistencia {
         return self::montarSQL($select);
     }
 
+    /**
+     * Realiza a Insert no banco com base nos parâmetros 
+     * @param String  $tabela
+     * @param Array   $arrayAtributos
+     * @param Array $valoresTabela
+     */
     public static function insertBD($tabela, $arrayAtributos, $valoresTabela) {
         $insert = ' ';
         $atributos = ' INSERT INTO ' . $tabela . ' (';
@@ -62,6 +82,12 @@ class Persistencia {
         mysqli_close(self::conexao());
     }
 
+    /**
+     * Realiza a Update no banco com base nos parâmetros 
+     * @param String $tabela
+     * @param Array  $arraySets
+     * @param String $condicao
+     */
     public static function updateBD($tabela, $arraySets, $condicao) {
         $update = ' ';
         $updateTabela = ' UPDATE ' . $tabela;
@@ -79,6 +105,11 @@ class Persistencia {
         mysqli_close(self::conexao());
     }
 
+    /**
+     * Realiza a Delete no banco com base nos parâmetros 
+     * @param String $tabela
+     * @param String $condicao
+     */
     public static function deleteBD($tabela, $condicao = null) {
         $delete = ' ';
         $deleteAtributos = 'DELETE ';
@@ -94,6 +125,11 @@ class Persistencia {
         mysqli_close(self::conexao());
     }
 
+    /**
+     * Realiza a montagem do SQL e retorna os valores 
+     * @param  String $select
+     * @return Array  $aVetor
+     */
     private static function montarSQL($select) {
         $aVetor = array();
         $aResultado = mysqli_fetch_all(mysqli_query(self::conexao(), $select));

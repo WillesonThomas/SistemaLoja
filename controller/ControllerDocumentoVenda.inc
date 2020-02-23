@@ -1,13 +1,18 @@
 <?php
 
-require_once './model/DocumentoVenda.inc';
+require_once './model/ModelDocumentoVenda.inc';
 require_once './persistencia/PersistenciaDocumentoVenda.inc';
 require_once './persistencia/PersistenciaProduto.inc';
 require_once './view/ViewDocumentoVenda.inc';
 
+/**
+ * Controller do Documento da Venda
+ * @package controller
+ * @author Willeson Thomas da Silva <will.thomassilva@gmail.com>
+ */
 class ControllerDocumentoVenda {
 
-    /** @var DocumentoVenda */
+    /** @var ModelDocumentoVenda */
     private $DocumentoVenda;
 
     /** @var PersistenciaDocumentoVenda */
@@ -24,11 +29,20 @@ class ControllerDocumentoVenda {
         return $this->DocumentoVenda;
     }
 
-    function setDocumentoVenda(DocumentoVenda $DocumentoVenda) {
+    function setDocumentoVenda(ModelDocumentoVenda $DocumentoVenda) {
         $this->DocumentoVenda = $DocumentoVenda;
     }
 
-    public function cadastrar() {
+    /**
+     * Realiza atualização da situação do Documento Venda
+     */
+    protected function cadastrar() {
+        $iCodigoProduto = 1;
+        $selectDocumentoVenda = $this->PersistenciaDocumentoVenda->getCodigoDocumentoVenda();
+        if (count($selectDocumentoVenda) != 0) {
+            $iCodigoProduto += $selectDocumentoVenda[0][0];
+        }
+        $this->ViewDocumentoVenda->criarPaginaDocumentoVendaCadastrar($iCodigoProduto);
         if (isset($_POST['codigoDocumentoVenda'])) {
             $this->getDocumentoVenda()->setCodigoVenda($_POST['codigoDocumentoVenda']);
             $this->getDocumentoVenda()->setSituacao(1);
@@ -36,26 +50,38 @@ class ControllerDocumentoVenda {
         }
     }
 
-    public function processarDados() {
-        $oDocumentoVenda = new DocumentoVenda();
+    /**
+     * Realiza Consulta no Banco de dados para exibir os dados na tela
+     */
+    protected function consultar() {
+        $select = $this->PersistenciaDocumentoVenda->selectDocumentoVendaConfirmadas();
+        $totalDocumentoVenda = $this->PersistenciaDocumentoVenda->calculaTotalDocumentoVenda(1);
+        $this->ViewDocumentoVenda->criarPaginaDocumentoVendaExibir($select, $totalDocumentoVenda);
+    }
+
+    /**
+     * Verifica as ações com base nos parâmetros
+     */
+    protected function verificaAcao() {
+        switch (true) {
+            case isset($_GET['consulta']):
+                $this->consultar();
+                break;
+            default:
+                $this->cadastrar();
+                break;
+        }
+    }
+
+    /**
+     * Realiza o Processamento dos dados e verifica qual ação execultar.
+     */
+    protected function processarDados() {
+        $oDocumentoVenda = new ModelDocumentoVenda();
         $this->setDocumentoVenda($oDocumentoVenda);
         $this->PersistenciaDocumentoVenda = new PersistenciaDocumentoVenda();
-        $persistenciaDocumetoVenda = new PersistenciaDocumentoVenda();
         $this->ViewDocumentoVenda = new ViewDocumentoVenda();
-
-        if (isset($_GET['consulta'])) {
-            $select = $this->PersistenciaDocumentoVenda->selectDocumentoVendaConfirmadas();
-            $totalDocumentoVenda= $this->PersistenciaDocumentoVenda->calculaTotalDocumentoVenda(1);   
-            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaExibir($select,$totalDocumentoVenda);
-        } else {
-            $iCodigoProduto = 1;
-            $selectDocumentoVenda = $persistenciaDocumetoVenda->getCodigoDocumentoVenda();
-            if(count($selectDocumentoVenda)!=0){
-                $iCodigoProduto += $selectDocumentoVenda[0][0];
-            }
-            $this->ViewDocumentoVenda->criarPaginaDocumentoVendaCadastrar($iCodigoProduto);
-            $this->cadastrar();
-        }
+        $this->verificaAcao();
     }
 
 }

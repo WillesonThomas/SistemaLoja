@@ -2,7 +2,7 @@
 
 require_once 'Persistencia.inc';
 
-class PersistenciaItemVenda {
+class PersistenciaUsuario {
 
     private $atributos;
     private $tabela;
@@ -29,26 +29,15 @@ class PersistenciaItemVenda {
     }
 
     function setCondicao($condicao) {
-        $this->condicao = "TBITEM.DOCCODIGO=" . $condicao;
-    }
-
-    /**
-     * Realiza a Insert no banco 
-     * @param ModelDocumentoVenda $oDocumento
-     * @param ModelProduto        $produto
-     */
-    public function insert(ModelDocumentoVenda $oDocumento,ModelProduto $produto) {
-        Persistencia::insertBD("TBITEM",
-                ['DOCCODIGO', 'PROCODIGO'],
-                [$oDocumento->getCodigoVenda(), $produto->getCodigo()]);
+        $this->condicao = "TBPRODUTO.PROCODIGO=" . $condicao;
     }
 
     /**
      * Realiza a Select no banco 
      */
     public function select() {
-        $this->atributos = ['TBITEM.DOCCODIGO', 'TBITEM.PROCODIGO'];
-        $this->tabela = 'TBITEM';
+        $this->atributos = ['TBUSUARIO.USACODIGO', 'TBUSUARIO.USAUSUARIO', 'TBUSUARIO.USASENHA', 'TBUSUARIO.USATIPO'];
+        $this->tabela = 'TBUSUARIO';
         if ($this->condicao == null) {
             return Persistencia::selectecBD($this->getAtributos(), $this->getTabela());
         } else {

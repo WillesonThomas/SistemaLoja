@@ -1,6 +1,11 @@
 <?php
 
-class DocumentoVenda {
+/**
+ * Model de Documento Venda
+ * @package model
+ * @author Willeson Thomas da Silva <will.thomassilva@gmail.com>
+ */
+class ModelDocumentoVenda {
     
     private $codigoVenda;
     private $total;

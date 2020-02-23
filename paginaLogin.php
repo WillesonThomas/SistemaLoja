@@ -5,8 +5,8 @@
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link href="css/estiloPaginasCadastros.css" rel="stylesheet" type="text/css"/>
-        <script src="scripts/scriptGenerico.js" type="text/javascript"></script>
+        <link href="css/estiloPaginas.css" rel="stylesheet" type="text/css"/>
+        <script src="js/scriptGenerico.js" type="text/javascript"></script>
     </head>
     <body>
         <!------------------------------------------Formulário------------------------------------------>
@@ -35,14 +35,14 @@
                 session_start();
                 if (!isset($_SESSION['usuarioSecao'])) {
                     if (isset($_POST['usuario']) and ! empty($_POST['usuario']) and isset($_POST['senha']) and ! empty($_POST['senha'])) {
-                        require_once './model/Usuario.inc';
-                        Usuario::validarLogin();
+                        require_once './controller/ControllerUsuario.inc';
+                        $oControllerUsuario = new ControllerUsuario();
                     }
                 } else {
                     session_destroy();
                 }
-                require_once './model/Estrutura.inc';
-                Estrutura::criarAviso();
+                require_once './model/ModelEstrutura.inc';
+                ModelEstrutura::criarAviso();
                 ?>
             </div>
         </div>

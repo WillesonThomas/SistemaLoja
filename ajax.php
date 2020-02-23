@@ -1,7 +1,7 @@
 <?php
 
-require_once './model/Produto.inc';
-require_once './model/DocumentoVenda.inc';
+require_once './model/ModelProduto.inc';
+require_once './model/ModelDocumentoVenda.inc';
 require_once './persistencia/Persistencia.inc';
 require_once './persistencia/PersistenciaDocumentoVenda.inc';
 require_once './persistencia/PersistenciaItemVenda.inc';
@@ -24,7 +24,7 @@ function selectProduto($iCodigoVenda, $iCodigoProduto) {
 
 function insereDocumentoVenda($iCodigoVenda, $aProduto) {
     $oPersistencia = new PersistenciaDocumentoVenda();
-    $oDocumentoVenda = new DocumentoVenda();
+    $oDocumentoVenda = new ModelDocumentoVenda();
     $oDocumentoVenda->setCodigoVenda($iCodigoVenda);
     $oDocumentoVenda->setSituacao(0);
     
@@ -41,7 +41,7 @@ function insereDocumentoVenda($iCodigoVenda, $aProduto) {
 }
 
 function insereItemVenda($oDocumentoVenda, $aProduto) {
-    $oProduto = new Produto();
+    $oProduto = new ModelProduto();
     $oProduto->setCodigo($aProduto[0][0]);
 
     $oPersistenciaItemVenda = new PersistenciaItemVenda();

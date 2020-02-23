@@ -5,21 +5,21 @@
         <meta charset="windows-1252">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link href="css/estiloPaginasCadastros.css" rel="stylesheet" type="text/css"/>
-        <script src="scripts/scriptGenerico.js" type="text/javascript"></script>
+        <link href="css/estiloPaginas.css" rel="stylesheet" type="text/css"/>
+        <script src="js/scriptGenerico.js" type="text/javascript"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     </head>
     <body>
         <!------------------------------------------Menu------------------------------------------>
         <?php
         session_start();
-        require_once './model/Estrutura.inc'; //encerra se não achar
-        Estrutura::criarMenu();
+        require_once './model/ModelEstrutura.inc';
+        ModelEstrutura::criarMenu();
         if (!isset($_GET['pg']) || ($_GET['pg']) == 'paginaPrincipalUsuario') {
-            Estrutura::criarPaginaPrincipal();
+            ModelEstrutura::criarPaginaPrincipal();
             require_once './controller/ControllerPaginaPrincipal.inc'; //encerra se não achar
-          $get = './controller/ControllerPaginaPrincipal';
-        $oPaginaPrincipal = new ControllerPaginaPrincipal();
+            $get = './controller/ControllerPaginaPrincipal';
+            $oPaginaPrincipal = new ControllerPaginaPrincipal();
         }
         $get = '';
         if (isset($_GET['pg'])) {
@@ -37,7 +37,7 @@
                 default:
                     break;
             }
-            Estrutura::carregarPagina($get);
+            ModelEstrutura::carregarPagina($get);
         }
         ?>
         <footer>

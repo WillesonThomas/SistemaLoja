@@ -145,18 +145,6 @@ hr {
   margin-bottom: 25px;
 }
 
-/* Set a style for the submit button */
-.btnCadastrar {
-    background-color: #387932;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
 .btnLimpar:hover {
   opacity: 1;
 }
@@ -173,6 +161,18 @@ hr {
 
 .btnCadastrar:hover {
   opacity: 1;
+}
+
+/* Set a style for the submit button */
+.btnCadastrar {
+    background-color: #387932;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
 }
 
 .signin {
@@ -319,7 +319,7 @@ img.avatar {
   text-align: center;
   color: white;
   height: 340px;
-  background-image: url("../imagens/wallpapermenu.jpg");
+  background-image: url("../imagens/imgMenu.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

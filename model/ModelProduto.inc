@@ -1,6 +1,11 @@
 <?php
 
-class Produto {
+/**
+ * Model de Produto
+ * @package model
+ * @author Willeson Thomas da Silva <will.thomassilva@gmail.com>
+ */
+class ModelProduto {
 
     private $codigo;
     private $descricao;

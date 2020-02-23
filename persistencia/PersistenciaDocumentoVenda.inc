@@ -32,56 +32,86 @@ class PersistenciaDocumentoVenda {
         $this->condicao = "TBDOCUMENTO.DOCCODIGO=" . $condicao;
     }
 
-    public function insert(DocumentoVenda $docVenda) {
-        Persistencia::insertBD("TBDOCUMENTO", ['DOCCODIGO','DOCTOTAL', 'DOCSITUACAO'],
+    /**
+     * Realiza a Insert no banco 
+     * @param ModelDocumentoVenda $docVenda
+     */
+    public function insert(ModelDocumentoVenda $docVenda) {
+        Persistencia::insertBD("TBDOCUMENTO", ['DOCCODIGO', 'DOCTOTAL', 'DOCSITUACAO'],
                 [$docVenda->getCodigoVenda(), $docVenda->getTotal(), $docVenda->getSituacao()]);
     }
 
-    public function update(DocumentoVenda $docVenda) {
+    /**
+     * Realiza a Update no banco 
+     * @param ModelDocumentoVenda $docVenda
+     */
+    public function update(ModelDocumentoVenda $docVenda) {
         Persistencia::updateBD("TBDOCUMENTO",
-                ['DOCTOTAL=' . $docVenda->getTotal(),'DOCSITUACAO=' . $docVenda->getSituacao()],
-                 'DOCCODIGO=' . $docVenda->getCodigoVenda());
+                ['DOCTOTAL=' . $docVenda->getTotal(), 'DOCSITUACAO=' . $docVenda->getSituacao()],
+                'DOCCODIGO=' . $docVenda->getCodigoVenda());
     }
 
-    public function updateSituacao(DocumentoVenda $docVenda) {
+    /**
+     * Realiza a Update da situação no banco 
+     * @param ModelDocumentoVenda $docVenda
+     */
+    public function updateSituacao(ModelDocumentoVenda $docVenda) {
         Persistencia::updateBD("TBDOCUMENTO",
                 ['DOCSITUACAO=' . $docVenda->getSituacao()],
-                 'DOCCODIGO=' . $docVenda->getCodigoVenda());
+                'DOCCODIGO=' . $docVenda->getCodigoVenda());
     }
 
-    public function delete(DocumentoVenda $docVenda) {
+    /**
+     * Realiza Delete no banco 
+     * @param ModelDocumentoVenda $docVenda
+     */
+    public function delete(ModelDocumentoVenda $docVenda) {
         Persistencia::deleteBD("TBDOCUMENTO", 'DOCCODIGO=' . $docVenda->getCodigoVenda());
     }
 
-    public function selectDocumentoVenda($condicao=null) {
-        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL','TBDOCUMENTO.DOCSITUACAO'];
+    /**
+     * Realiza a Select no banco 
+     * @param String $condicao
+     */
+    public function selectDocumentoVenda($condicao = null) {
+        $this->atributos = ['TBDOCUMENTO.DOCCODIGO', 'TBDOCUMENTO.DOCTOTAL', 'TBDOCUMENTO.DOCSITUACAO'];
         $this->tabela = 'TBDOCUMENTO';
-        if($condicao){
-            $this->condicao = 'TBDOCUMENTO.DOCCODIGO='.$condicao;
+        if ($condicao) {
+            $this->condicao = 'TBDOCUMENTO.DOCCODIGO=' . $condicao;
         }
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
 
+    /**
+     * Realiza a Select filtrando pelas vendas confirmadas (DOCSITUAÇÃO = 1) o banco 
+     */
     public function selectDocumentoVendaConfirmadas() {
-        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL'];
+        $this->atributos = ['TBDOCUMENTO.DOCCODIGO', 'TBDOCUMENTO.DOCTOTAL'];
         $this->tabela = 'TBDOCUMENTO';
         $this->condicao = 'TBDOCUMENTO.DOCSITUACAO=1';
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
 
+    /**
+     * Realiza a Select buscando o codigo da ultima venda cadastrada
+     */
     public function getCodigoDocumentoVenda() {
-        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL','TBDOCUMENTO.DOCSITUACAO'];
+        $this->atributos = ['TBDOCUMENTO.DOCCODIGO', 'TBDOCUMENTO.DOCTOTAL', 'TBDOCUMENTO.DOCSITUACAO'];
         $this->tabela = 'TBDOCUMENTO ORDER BY DOCCODIGO DESC LIMIT 1';
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
-    
-    public function calculaTotalDocumentoVenda($condicao=null){
+
+    /**
+     * Realiza a Select no banco para calcular o total das vendas 
+     * @param String $condicao
+     */
+    public function calculaTotalDocumentoVenda($condicao = null) {
         $this->atributos = ['SUM(DOCTOTAL)'];
         $this->tabela = 'TBDOCUMENTO';
-        if($condicao){
-            $this->condicao = 'TBDOCUMENTO.DOCSITUACAO='.$condicao;
+        if ($condicao) {
+            $this->condicao = 'TBDOCUMENTO.DOCSITUACAO=' . $condicao;
         }
-        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());        
+        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
 
 }

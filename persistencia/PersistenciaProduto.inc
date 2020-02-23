@@ -32,22 +32,37 @@ class PersistenciaProduto {
         $this->condicao = "TBPRODUTO.PROCODIGO=" . $condicao;
     }
 
-    public function insert(Produto $produto) {
+    /**
+     * Realiza a Insert no banco 
+     * @param ModelProduto $produto
+     */
+    public function insert(ModelProduto $produto) {
         Persistencia::insertBD("TBPRODUTO",
                 ['PRODESCRICAO','PROPRECO'],
                 ['\'' . $produto->getDescricao() . '\'',$produto->getPreco()]);
     }
 
-    public function update(Produto $produto) {
+    /**
+     * Realiza a Update no banco 
+     * @param ModelProduto $produto
+     */
+    public function update(ModelProduto $produto) {
         Persistencia::updateBD("TBPRODUTO",
                 ['PRODESCRICAO=\'' . $produto->getDescricao() . '\'', 'PROPRECO='.$produto->getPreco()],
                  'PROCODIGO=' . $produto->getCodigo());
     }
 
-    public function delete(Produto $produto) {
+    /**
+     * Realiza Delete no banco 
+     * @param ModelProduto $produto
+     */
+    public function delete(ModelProduto $produto) {
         Persistencia::deleteBD("TBPRODUTO", 'PROCODIGO=' . $produto->getCodigo());
     }
 
+    /**
+     * Realiza a Select no banco 
+     */
     public function select() {
         $this->atributos = ['TBPRODUTO.PROCODIGO', 'TBPRODUTO.PRODESCRICAO', 'TBPRODUTO.PROPRECO'];
         $this->tabela = 'TBPRODUTO';
