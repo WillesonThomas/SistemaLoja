@@ -38,16 +38,6 @@ class PersistenciaItemVenda {
                 [$oDocumento->getCodigoVenda(), $produto->getCodigo()]);
     }
 
-//    public function update(Produto $produto) {
-//        Persistencia::updateBD("TBITEM",
-//                ['DOCCODIGO=\'' . $produto->getDescricao() . '\'', 'PROFABRICANTE=\'' . $produto->getFabricante(). '\'', 'PROPRECOVENDA='.$produto->getPrecoVenda()],
-//                 'PROCODIGO=' . $produto->getCodigo());
-//    }
-//
-//    public function delete(Produto $produto) {
-//        Persistencia::deleteBD("TBITEM", 'PROCODIGO=' . $produto->getCodigo());
-//    }
-
     public function select() {
         $this->atributos = ['TBITEM.DOCCODIGO', 'TBITEM.PROCODIGO'];
         $this->tabela = 'TBITEM';

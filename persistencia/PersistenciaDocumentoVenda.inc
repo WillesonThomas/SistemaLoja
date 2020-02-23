@@ -56,17 +56,22 @@ class PersistenciaDocumentoVenda {
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
 
-    public function selectDocumentoVendaTabela() {
-        $this->atributos = ['TBDOCUMENTO.DOCCODIGO'];
-        $this->tabela = 'TBDOCUMENTO GROUP BY TBDOCUMENTO.DOCCODIGO';
+    public function getCodigoDocumentoVenda() {
+        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL','TBDOCUMENTO.DOCSITUACAO'];
+        $this->tabela = 'TBDOCUMENTO ORDER BY DOCCODIGO DESC LIMIT 1';
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
-    
-//    public function calculaTotalDocumentoVenda($condicao){
-//        $this->atributos = ['SUM((PEDQUANTIDADE*PEDPRECOUNITARIO)-PEDDESCONTO)'];
-//        $this->tabela = 'TBDOCUMENTO';
-//        $this->condicao = 'TBDOCUMENTO.PEDCODIGO='.$condicao;
-//        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());        
+
+//    public function selectDocumentoVendaTabela() {
+//        $this->atributos = ['TBDOCUMENTO.DOCCODIGO'];
+//        $this->tabela = 'TBDOCUMENTO GROUP BY TBDOCUMENTO.DOCCODIGO';
+//        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
 //    }
+    
+    public function calculaTotalDocumentoVenda(){
+        $this->atributos = ['SUM(DOCTOTAL)'];
+        $this->tabela = 'TBDOCUMENTO';
+        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());        
+    }
 
 }

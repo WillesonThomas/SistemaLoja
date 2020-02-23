@@ -4,38 +4,25 @@ require_once './model/Estrutura.inc'; //encerra se não achar
 
 class ViewDocumentoVenda {
     
-      public function criarPaginaDocumentoVendaCadastrar($selectPessoa,$selectProduto) {
+      public function criarPaginaDocumentoVendaCadastrar($iCodigoProduto) {
         Estrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewDocumentoVenda", "Cadastro de Venda");
-        Estrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Codigo da Venda", "campoCodigoDocumentoVenda", "text", "11",40,false, false, true);
+        Estrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Codigo da Venda", "campoCodigoDocumentoVenda", "text", "11",$iCodigoProduto,false, false, true);
         Estrutura::criarInput("alertaCodigoProdutoDocumentoVenda", "codigoProdutoDocumentoVenda", "Codigo", "campoCodigoProdutoDocumentoVenda", "text", "11");
         Estrutura::criarBotao("button", "BUSCAR", "buscarProduto");
+        echo '<br>';
         Estrutura::montaTabelaJs();
-        Estrutura::criarBotao("submit", "CADASTRAR", "cadastrarPessoaImovel");
-        Estrutura::criarBotao("reset", "LIMPAR", "limparImovel", true);
+        echo '<br><br><br><br>';
+        Estrutura::criarBotao("submit", "CONFIRMAR", "cadastrarPessoaImovel");
+        Estrutura::criarBotao("reset", "CANCELAR", "limparImovel", true);
     }
 
     public function criarPaginaDocumentoVendaExibir($select,$totalDocumentoVenda) {
-//        echo '<center><h1>Venda '.$select[0][0].'</h1></center>';
-//        echo '<div style="height:700px">';
-//        Estrutura::montarTabela(['Codigo','Total','Situacao'],$select);
-//        echo '<center><h2>Total:'.$totalDocumentoVenda[0][2].'<h2></center>';
-//        echo '</div>';
-//        echo '<br><hr><br>';
+        echo '<center><h1>Vendas</h1></center>';
+        echo '<div style="height:700px">';
+        Estrutura::montarTabela(['Codigo da Venda','Total','Situacao'],$select, true, true);
+        echo '<center><h2>Total das Vendas: '.$totalDocumentoVenda[0][0].'<h2></center>';
+        echo '</div>';
+        echo '<br><hr><br>';
     }
-
-    public function criarPaginaDocumentoVendaAlterar($select,$selectPessoa,$selectProduto) {
-//        Estrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewDocumentoVenda&alterar=" . ($_GET['alterar']), "Alterar DocumentoVenda");
-//        Estrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Codigo", "campoCodigoDocumentoVenda", "text", "11",$select[0][0]);
-//        Estrutura::criarInput("alertaTotalDocumentoVenda", "totalDocumentoVenda", "Total", "campoTotalDocumentoVenda", "text", "50",$select[0][1]);
-//        Estrutura::criarInput("alertaPrecoUnitario", "situacaoDocumentoVenda", "Situacao", "campoSituacaoDocumentoVenda", "text", "50",$select[0][2]);
-//        Estrutura::criarBotao("submit", "ALTERAR", "cadastrarPessoaImovel");
-//        Estrutura::criarBotao("reset", "LIMPAR", "limparImovel", true);
-    }
-
-    public function criarPaginaDocumentoVendaVizualizar($select,$selectPessoa,$selectProduto) {
-//        Estrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewDocumentoVenda&vizualizarr=" . ($_GET['vizualizar']), "Visualiar Venda");
-//        Estrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Codigo", "campoCodigoDocumentoVenda", "text", "11",$select[0][0]);
-//        Estrutura::criarInput("alertaTotalDocumentoVenda", "totalDocumentoVenda", "Total", "campoTotalDocumentoVenda", "text", "50",$select[0][1]);
-//        Estrutura::criarInput("alertaSituacaoDocumentoVenda", "situacaoDocumentoVenda", "Situacao", "campoSituacaoDocumentoVenda", "text", "50",$select[0][2],true,true);
-    }  
+    
 }

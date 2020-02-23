@@ -13,7 +13,7 @@ class Estrutura {
     public static function criarPaginaPrincipal() {
         ?>
         <div class="containerBanner">
-    
+
         </div>      
         </div>;
         <?php
@@ -32,18 +32,16 @@ class Estrutura {
                         <img src="imagens/productswallpaper.png"/>
                     </a>
                 </div>
-<!--                <div class="column menu-column">
-                    <h3>Pessoas</h3>
-                    <a href="paginaPrincipalUsuario.php?pg=ViewPessoa&consulta">
-                        <img src="imagens/pessoa.jpg"/>
-                    </a>
-                </div>-->
-                <div class="column menu-column">
+                <?php
+                if (isset($_SESSION['usuarioTipo']) and ($_SESSION['usuarioTipo']) == 0) {
+                    echo '<div class="column menu-column">
                     <h3>Vendas</h3>
                     <a href="paginaPrincipalUsuario.php?pg=ViewDocumentoVenda&consulta">
                         <img src="imagens/orderwallpaper.png"/>
                     </a>
-                </div>
+                    </div>';
+                }
+                ?>
             </div>
 
             <div class="containerTabelaImagens">
@@ -52,12 +50,12 @@ class Estrutura {
                 <div id="imgtext"></div>
             </div>        
         </div>
-     <?php
+        <?php
     }
 
     public static function criarMenuCliente() {
         ?>
-            <div class="navbar">
+        <div class="navbar">
             <a href="paginaPrincipalCliente.php">Pagina Inicial</a>
             <a id="sessao" href="paginaLogin.php">Login</a></div>
         <?php
@@ -65,35 +63,41 @@ class Estrutura {
 
     public static function criarMenu() {
         ?>
-            <div class="navbar">
+        <div class="navbar">
             <a href="paginaPrincipalUsuario.php">Pagina Inicial</a>
             <div class="subnav">
                 <button class="subnavbtn">Exibir <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                    <a href="paginaPrincipalUsuario.php?pg=ViewProduto&consulta">Produto</a>
-<!--                    <a href="paginaPrincipalUsuario.php?pg=ViewPessoa&consulta">Pessoa</a>-->
-                    <a href="paginaPrincipalUsuario.php?pg=ViewDocumentoVenda&consulta">Venda</a>
+                    <?php
+                    echo '<a href="paginaPrincipalUsuario.php?pg=ViewProduto&consulta">Produto</a>';
+                    if (isset($_SESSION['usuarioTipo']) and ($_SESSION['usuarioTipo']) == 0) {
+                        echo '<a href="paginaPrincipalUsuario.php?pg=ViewDocumentoVenda&consulta">Venda</a>';
+                    }
+                    ?>
                 </div></div>
-                    
-                <div class="subnav">
+
+            <div class="subnav">
                 <button class="subnavbtn">Cadastrar <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
-                    <a href="paginaPrincipalUsuario.php?pg=ViewProduto">Produto</a>
-<!--                    <a href="paginaPrincipalUsuario.php?pg=ViewPessoa">Pessoa</a>-->
-                    <a href="paginaPrincipalUsuario.php?pg=ViewDocumentoVenda">Venda</a>
+                    <?php
+                    if (isset($_SESSION['usuarioTipo']) and ($_SESSION['usuarioTipo']) == 0) {
+                        echo '<a href="paginaPrincipalUsuario.php?pg=ViewProduto">Produto</a>';
+                    }
+                    echo '<a href="paginaPrincipalUsuario.php?pg=ViewDocumentoVenda">Venda</a>';
+                    ?>
                 </div></div>'
-        <a id="sessao" href="paginaLogin.php">Logout</a>
-        <?php
-        if (isset($_SESSION['usuarioSecao'])) {
-            echo '<a id="sessao" href="">' . $_SESSION['usuarioSecao'] . '</a></div>';
-        } else {
-            header("Location: paginaLogin.php");
+            <a id="sessao" href="paginaLogin.php">Logout</a>
+            <?php
+            if (isset($_SESSION['usuarioSecao'])) {
+                echo '<a id="sessao" href="">' . $_SESSION['usuarioSecao'] . '</a></div>';
+            } else {
+                header("Location: paginaLogin.php");
+            }
         }
-    }
 
-    public static function criarAviso() {
-        ?>
-        <div id="divAvisoAlerta">
+        public static function criarAviso() {
+            ?>
+            <div id="divAvisoAlerta">
                 <span class="fechar" title="Close Modal">&times;</span>
                 <img src="imagens/icones/alert.png" class="imagemAviso" alt="alerta"/>
                 <br/>
@@ -129,7 +133,7 @@ class Estrutura {
                     </h3>
                 </div>
             </div></div></div>
-            <?php
+        <?php
     }
 
     public static function criarFormulario($acaoFormulario, $tituloFormulario, $method = false) {
@@ -142,7 +146,7 @@ class Estrutura {
         echo '<h1>' . $tituloFormulario . '</h1><hr>';
     }
 
-    public static function criarInput($idAlerta, $name, $label, $idCampo, $typeCampo, $tamanhoMax, $value = null, $desabilitar = null,$verifica = null, $readOnly = null) {
+    public static function criarInput($idAlerta, $name, $label, $idCampo, $typeCampo, $tamanhoMax, $value = null, $desabilitar = null, $verifica = null, $readOnly = null) {
         echo '<img src="imagens/icones/error.png" id="' . $idAlerta . '" class="imagemalertasmall"/>'
         . '<label for="' . $name . '"><b>' . $label . '*</b></label>';
         if ($desabilitar) {
@@ -150,7 +154,7 @@ class Estrutura {
         } else {
             if ($value == null) {
                 echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" required>';
-            } else if($readOnly != null and $value != null) {
+            } else if ($readOnly != null and $value != null) {
                 echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" value="' . $value . '" readonly="readonly" required>';
             } else {
                 echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" value="' . $value . '" required>';
@@ -166,14 +170,13 @@ class Estrutura {
         $classBotao = "btnCadastrar";
         if ($type == "reset") {
             $classBotao = "btnLimpar";
-        }
+        } 
         echo '<input type="' . $type . '" class="' . $classBotao . '" value="' . $value . '" id="' . $idButton . '">';
         if ($verifica) {
             echo '</form>';
             self::criarAviso();
         }
     }
-
 
     public static function criarSelect($idAlerta, $name, $label, $id, $lista, $verifica = null, $verificaAlterar = null) {
         echo '<img src="imagens/icones/error.png" id="' . $idAlerta . '" class="imagemalertasmall"/>'
@@ -236,9 +239,9 @@ class Estrutura {
                 echo '<td><a href="paginaPrincipalUsuario.php?pg=' . ($_GET['pg']) .
                 '&deletar=' . $iDeletar . '"><img class="iconesacoes" src="imagens/icones/delete-icon.png" style="width:25px;height:25px"></a>';
                 echo '<a href="paginaPrincipalUsuario.php?pg=' . ($_GET['pg']) .
-               '&alterar=' . $iAlterar . '"><img style="height:30px; padding-top:5px" class="iconesacoes" src="imagens/icones/pencil-icon.png" style="width:25px;height:25px"></a>';
+                '&alterar=' . $iAlterar . '"><img style="height:30px; padding-top:5px" class="iconesacoes" src="imagens/icones/pencil-icon.png" style="width:25px;height:25px"></a>';
                 echo '<a href="paginaPrincipalUsuario.php?pg=' . ($_GET['pg']) .
-               '&vizualizar=' . $iVizualizar . '"><img class="iconesacoes" src="imagens/icones/eye-icon.png" style="width:25px;height:25px"></a>';
+                '&vizualizar=' . $iVizualizar . '"><img class="iconesacoes" src="imagens/icones/eye-icon.png" style="width:25px;height:25px"></a>';
                 echo '</td>';
             }
             echo '</tr>';
@@ -246,7 +249,7 @@ class Estrutura {
         echo '</tbody>';
         echo '</table>';
     }
-    
+
     public static function montaTabelaJs() {
         echo '<br>';
         echo '<table border="1" class="table_listagem" id="itemList">
@@ -263,4 +266,3 @@ class Estrutura {
     }
 
 }
-	

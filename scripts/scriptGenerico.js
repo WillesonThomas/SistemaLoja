@@ -10,7 +10,6 @@ $(document).ready(function () {
 
     cadastrarProduto();
     cadastrarDocumentoVenda();
-//    cadastrarPedido();
     paginaLogin();
 });
 
@@ -106,6 +105,8 @@ function cadastrarDocumentoVenda() {
             dataType: "json",
             data: {codigoProdutoVenda: $produto, codigoVenda: $codigoVenda},
             success: function (data) {
+                debugger;
+                window.alert(data);
                 if(data.length==0){
                     avisoErro("Produto Nao Cadastrado");   
                 }
@@ -129,62 +130,6 @@ function createTable(items) {
         }
         $(rows).appendTo("#itemList tbody");
     }
-
-function validarCep(idCampo, alertaCampo, mensagemCampo) {
-    if ($(idCampo).val() == "" || isNaN($(idCampo).val())) {
-        document.getElementById(alertaCampo).src = "imagens/icones/error.png";
-        $("#" + alertaCampo).fadeIn("slow");
-        $(idCampo).css("borderBottom", "solid red");
-        avisoErro(mensagemCampo);
-    } else {
-        document.getElementById(alertaCampo).src = "imagens/icones/success.png";
-        $("#" + alertaCampo).fadeIn("fast");
-        $(idCampo).css("borderBottom", "solid gray");
-    }
-}
-
-function cadastrarPedido() {
-
-    $("#campoCodigoPessoa").blur(function () {
-        var $pessoa = $("#campoCodigoPessoa").val();
-        $.ajax({
-            url: 'ajax.php',
-            type: 'POST',
-            data: {codigoPessoa: $pessoa},
-            success: function (data) {
-                $("#campoDesconto").val(data);
-            }, error: function () {
-                $("#campoDesconto").html("Erro ao carregar");
-            }
-        });
-    });
-
-    $("#campoCodigoProduto").blur(function () {
-        var $produto = $("#campoCodigoProduto").val();
-        $.ajax({
-            url: 'ajax.php',
-            type: 'POST',
-            data: {codigoProduto: $produto},
-            success: function (data) {
-                $("#campoPrecoUnitario").val(data);
-            }, error: function () {
-                $("#campoPrecoUnitario").html("Ocorreu um Erro!");
-            }
-        });
-    });
-
-    $("#campoQuantidade").blur(function () {
-        validarDadoNumerico("#campoQuantidade", "alertaQuantidade", "Informe somente numeros no campo 'Quantidade'");
-    });
-
-    $("#campoPrecoUnitario").blur(function () {
-        validarDadoNumerico("#campoPrecoUnitario", "alertaPrecoUnitario", "Informe somente numeros no campo 'Preco Unitario'");
-    });
-
-    $("#campoDesconto").blur(function () {
-        validarDadoNumerico("#campoDesconto", "alertaDesconto", "Informe somente numeros no campo 'Desconto'");
-    });
-}
 
 function paginaLogin() {
     var sCampo01 = false;

@@ -16,32 +16,36 @@ function selectProduto($iCodigoVenda, $iCodigoProduto) {
     $condicao = 'TBPRODUTO.PROCODIGO=' . $iCodigoProduto;
     $select = Persistencia::selectecBD($atributos, $tabela, $condicao);
 
-    if(count($select)!=0){
-        insereDocumentoVenda($iCodigoVenda, $iCodigoProduto);
+    if (count($select) != 0) {
+        insereDocumentoVenda($iCodigoVenda, $select);
     }
-
     echo json_encode($select);
-
-
-
 }
 
-function insereDocumentoVenda($iCodigoVenda, $iCodigoProduto) {
+function insereDocumentoVenda($iCodigoVenda, $aProduto) {
+    $oPersistencia = new PersistenciaDocumentoVenda();
     $oDocumentoVenda = new DocumentoVenda();
     $oDocumentoVenda->setCodigoVenda($iCodigoVenda);
-    $oDocumentoVenda->setTotal(10);
     $oDocumentoVenda->setSituacao(0);
     
-    $oPersistencia = new PersistenciaDocumentoVenda();
-    $oPersistencia->insert($oDocumentoVenda);
-    insereItemVenda($oDocumentoVenda, $iCodigoProduto);
+    $oVendaAtual = $oPersistencia->getCodigoDocumentoVenda();
+    if ($oVendaAtual[0][0] == $iCodigoVenda) {
+        $oDocumentoVenda->setTotal($oVendaAtual[0][1] + $aProduto[0][2]);
+        $oPersistencia->update($oDocumentoVenda);
+    } else {
+        $oDocumentoVenda->setTotal($aProduto[0][2]);
+        $oPersistencia->insert($oDocumentoVenda);
+    }
+
+    insereItemVenda($oDocumentoVenda, $aProduto);
 }
 
-function insereItemVenda($oDocumentoVenda,$iCodigoProduto) {
+function insereItemVenda($oDocumentoVenda, $aProduto) {
     $oProduto = new Produto();
-    $oProduto->setCodigo($iCodigoProduto);
-    
+    $oProduto->setCodigo($aProduto[0][0]);
+
     $oPersistenciaItemVenda = new PersistenciaItemVenda();
     $oPersistenciaItemVenda->insert($oDocumentoVenda, $oProduto);
 }
+
 ?>

@@ -44,11 +44,12 @@ class Usuario {
  
     //Valida os dados para efetuar login.
     public static function validarLogin() {
-        $atributosSelect = ['TBUSUARIO.USAUSUARIO', 'TBUSUARIO.USASENHA'];
+        $atributosSelect = ['TBUSUARIO.USAUSUARIO', 'TBUSUARIO.USASENHA', 'TBUSUARIO.USATIPO'];
         $tabela = 'TBUSUARIO';
         foreach (Persistencia::selectecBD($atributosSelect, $tabela) as $value) {
             if ($value[0] == ($_POST['usuario']) and $value[1] == md5(($_POST['senha']))) {
-                $_SESSION['usuarioSecao'] = $_POST['usuario'];            
+                $_SESSION['usuarioSecao'] = $_POST['usuario'];
+                $_SESSION['usuarioTipo']  = $value[2];
                 header("Location: paginaPrincipalUsuario.php");
             }
         }
