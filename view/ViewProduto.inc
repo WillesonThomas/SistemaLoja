@@ -14,7 +14,11 @@ class ViewProduto {
     public function criarPaginaProdutoExibir($select) {
         echo '<center><h1>Produto</h1></center>';
         echo '<div style="height:700px">';
-        Estrutura::montarTabela(['Codigo Produto','Descricao', 'Preco'],$select);
+        if (isset($_SESSION['usuarioTipo']) and ($_SESSION['usuarioTipo']) == 0) {
+            Estrutura::montarTabela(['Codigo Produto','Descricao', 'Preco'],$select);
+        } else {
+            Estrutura::montarTabela(['Codigo Produto','Descricao', 'Preco'],$select, true, true);
+        }
         echo '</div>';
     }
 

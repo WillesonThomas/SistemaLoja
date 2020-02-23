@@ -29,19 +29,11 @@ class ControllerDocumentoVenda {
     }
 
     public function cadastrar() {
-        if ($this->validarCampos()) {
+        if (isset($_POST['codigoDocumentoVenda'])) {
             $this->getDocumentoVenda()->setCodigoVenda($_POST['codigoDocumentoVenda']);
-            $this->getDocumentoVenda()->setTotal($_POST['totalDocumentoVenda']);
-            $this->getDocumentoVenda()->setSituacao($_POST['situacaoDocumentoVenda']);
-            $this->PersistenciaDocumentoVenda->insert($this->DocumentoVenda);
+            $this->getDocumentoVenda()->setSituacao(1);
+            $this->PersistenciaDocumentoVenda->updateSituacao($this->DocumentoVenda);
         }
-    }
-
-    public function validarCampos() {
-        if (isset($_POST['codigoDocumentoVenda']) and isset($_POST['totalDocumentoVenda']) and ! empty($_POST['situacaoDocumentoVenda'])) {
-            return true;
-        }
-        return false;
     }
 
     public function processarDados() {
@@ -52,8 +44,8 @@ class ControllerDocumentoVenda {
         $this->ViewDocumentoVenda = new ViewDocumentoVenda();
 
         if (isset($_GET['consulta'])) {
-            $select = $this->PersistenciaDocumentoVenda->selectDocumentoVenda();
-            $totalDocumentoVenda= $this->PersistenciaDocumentoVenda->calculaTotalDocumentoVenda();   
+            $select = $this->PersistenciaDocumentoVenda->selectDocumentoVendaConfirmadas();
+            $totalDocumentoVenda= $this->PersistenciaDocumentoVenda->calculaTotalDocumentoVenda(1);   
             $this->ViewDocumentoVenda->criarPaginaDocumentoVendaExibir($select,$totalDocumentoVenda);
         } else {
             $iCodigoProduto = 1;

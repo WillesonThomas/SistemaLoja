@@ -43,6 +43,12 @@ class PersistenciaDocumentoVenda {
                  'DOCCODIGO=' . $docVenda->getCodigoVenda());
     }
 
+    public function updateSituacao(DocumentoVenda $docVenda) {
+        Persistencia::updateBD("TBDOCUMENTO",
+                ['DOCSITUACAO=' . $docVenda->getSituacao()],
+                 'DOCCODIGO=' . $docVenda->getCodigoVenda());
+    }
+
     public function delete(DocumentoVenda $docVenda) {
         Persistencia::deleteBD("TBDOCUMENTO", 'DOCCODIGO=' . $docVenda->getCodigoVenda());
     }
@@ -56,21 +62,25 @@ class PersistenciaDocumentoVenda {
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
 
+    public function selectDocumentoVendaConfirmadas() {
+        $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL'];
+        $this->tabela = 'TBDOCUMENTO';
+        $this->condicao = 'TBDOCUMENTO.DOCSITUACAO=1';
+        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
+    }
+
     public function getCodigoDocumentoVenda() {
         $this->atributos = ['TBDOCUMENTO.DOCCODIGO','TBDOCUMENTO.DOCTOTAL','TBDOCUMENTO.DOCSITUACAO'];
         $this->tabela = 'TBDOCUMENTO ORDER BY DOCCODIGO DESC LIMIT 1';
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
     }
-
-//    public function selectDocumentoVendaTabela() {
-//        $this->atributos = ['TBDOCUMENTO.DOCCODIGO'];
-//        $this->tabela = 'TBDOCUMENTO GROUP BY TBDOCUMENTO.DOCCODIGO';
-//        return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());
-//    }
     
-    public function calculaTotalDocumentoVenda(){
+    public function calculaTotalDocumentoVenda($condicao=null){
         $this->atributos = ['SUM(DOCTOTAL)'];
         $this->tabela = 'TBDOCUMENTO';
+        if($condicao){
+            $this->condicao = 'TBDOCUMENTO.DOCSITUACAO='.$condicao;
+        }
         return Persistencia::selectecBD($this->getAtributos(), $this->getTabela(), $this->getCondicao());        
     }
 
