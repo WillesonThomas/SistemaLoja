@@ -63,15 +63,6 @@ class ControllerProduto {
     }
 
     /**
-     * Deleta o produto selecionado na tabela 
-     */
-    protected function deletar() {
-        $this->ViewProduto->criarPaginaProdutoCadastrar();
-        $this->getProduto()->setCodigo($_GET['deletar']);
-        $this->PersistenciaProduto->delete($this->Produto);
-    }
-
-    /**
      * Realiza cadastro do Produto com seus respectivos valores
      */
     protected function cadastrar() {
@@ -107,9 +98,6 @@ class ControllerProduto {
         switch (true) {
             case isset($_GET['consulta']):
                 $this->consultar();
-                break;
-            case isset($_GET['deletar']):
-                $this->deletar();
                 break;
             case isset($_GET['alterar']):
                 $this->alterar();
