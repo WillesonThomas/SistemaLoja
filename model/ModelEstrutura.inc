@@ -316,7 +316,7 @@ class ModelEstrutura {
      */
     public static function montaTabelaJs() {
         ?>
-        <br>
+        <br><br>
         <table border="1" class="table_listagem" id="itemList">
             <thead>
                 <tr>
@@ -327,7 +327,7 @@ class ModelEstrutura {
             </thead>
             <tbody>
             </tbody>
-        </table>
+        </table><br><br><br><br>
         <?php
     }
 

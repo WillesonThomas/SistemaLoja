@@ -18,9 +18,7 @@ class ViewDocumentoVenda {
         ModelEstrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Numero", "campoCodigoDocumentoVenda", "text", "11", $iCodigoProduto, false, false, true);
         ModelEstrutura::criarInput("alertaCodigoProdutoDocumentoVenda", "codigoProdutoDocumentoVenda", "Codigo", "campoCodigoProdutoDocumentoVenda", "text", "11");
         ModelEstrutura::criarBotao("button", "BUSCAR PRODUTO", "buscarProduto");
-        echo '<br>';
         ModelEstrutura::montaTabelaJs();
-        echo '<br><br><br><br>';
         ModelEstrutura::criarBotao("submit", "CONFIRMAR", "cadastrar");
         ModelEstrutura::criarBotao("reset", "CANCELAR", "limpar", true);
     }
