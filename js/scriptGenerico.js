@@ -15,7 +15,6 @@ $(document).ready(function () {
 
     cadastrarProduto();
     cadastrarDocumentoVenda();
-    paginaLogin();
 });
 
 /**
@@ -125,7 +124,7 @@ function fechar(idDiv) {
  */
 function cadastrarProduto() {
     $("#campoPrecoVenda").blur(function () {
-        validarDadoNumerico("#campoPrecoVenda", "alertaPrecoVenda", "Informe somente numeros no campo 'Preco Venda'");
+        validarDadoNumerico("#campoPrecoVenda", "alertaPrecoVenda", "Informe somente numeros");
     });
 
 }
@@ -138,13 +137,13 @@ function cadastrarDocumentoVenda() {
         var $produto = $("#campoCodigoProdutoDocumentoVenda").val();
         var $codigoVenda = $("#campoCodigoDocumentoVenda").val();
         $.ajax({
-            url: 'ajax.php',
+            url: 'Ajax.php',
             type: 'POST',
             dataType: "json",
             data: {codigoProdutoVenda: $produto, codigoVenda: $codigoVenda},
             success: function (data) {
                 if (data.length == 0) {
-                    avisoErro("Produto Nao Cadastrado");
+                    avisoErro("Produto nao Cadastrado");
                 }
                 createTable(data);
             }, error: function () {
@@ -154,7 +153,7 @@ function cadastrarDocumentoVenda() {
     });
 
     $("#campoCodigoProdutoDocumentoVenda").blur(function () {
-        validarDadoNumerico("#campoCodigoProdutoDocumentoVenda", "alertaCodigoProdutoDocumentoVenda", "Informe somente numeros no campo 'Numero'");
+        validarDadoNumerico("#campoCodigoProdutoDocumentoVenda", "alertaCodigoProdutoDocumentoVenda", "Informe somente numeros");
     });
 
 }
@@ -169,25 +168,4 @@ function createTable(dados) {
         rows += "<tr><td>" + dados[i][0] + "</td><td>" + dados[i][1] + "</td><td>" + dados[i][2] + "</td>";
     }
     $(rows).appendTo("#itemList tbody");
-}
-
-/**
- * Valida os campos do formulário da pagina de Login 
- */
-function paginaLogin() {
-    var sCampo01 = false;
-    var sCampo02 = false;
-    $("#entrarPagina").click(function () {
-        if (sCampo01 == false || sCampo02 == false) {
-            avisoAlertaLogin();
-        }
-    });
-
-    $("#campoUsuario").blur(function () {
-        sCampo01 = validarDadoSemTipagem("#campoUsuario", "alertaUsuario", "Informe algo no campo 'Usuario'");
-    });
-
-    $("#campoSenha").blur(function () {
-        sCampo02 = validarDadoSemTipagem("#campoSenha", "alertaSenha", "Informe algo no campo 'Senha'");
-    });
 }

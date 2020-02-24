@@ -11,17 +11,27 @@ class Persistencia {
      * Realiza a conexão com o banco de dados
      */
     private static function conexao() {
-        $sHost = 'localhost';
-        $sPort = '3306';
-        $sDbName = 'LOJA';
-        $sUser = 'root';
-        $sPassword = '';
+        $oConfig = self::lerConfiguracaoXml();
+        $sHost     = $oConfig[0];
+        $sDbName   = $oConfig[1];
+        $sUser     = $oConfig[2];
+        $sPassword = $oConfig[3];
 
         $sConexao = mysqli_connect($sHost, $sUser, $sPassword, $sDbName);
         if (!$sConexao) {
             die("Connection failed: " . mysqli_connect_error());
         }
         return $sConexao;
+    }
+
+    /**
+     * Realiza a leitura de configuração do xml para conexão com o banco de dados
+     * @return Array $aElementos
+     */
+    private static function lerConfiguracaoXml() {
+        $xml = simplexml_load_file('configuracao.xml');
+        $aElementos = [$xml->host, $xml->banco, $xml->user, $xml->password];
+        return $aElementos;
     }
 
     /**

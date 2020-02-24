@@ -35,15 +35,26 @@ class ControllerProduto {
     function getPersistenciaProduto() {
         return $this->PersistenciaProduto;
     }
+    
+    /**
+     * Realiza o Processamento dos dados e verifica qual ação execultar.
+     */
+    protected function processarDados() {
+        $oProduto = new ModelProduto();
+        $this->setProduto($oProduto);
+        $this->PersistenciaProduto = new PersistenciaProduto();
+        $this->ViewProduto = new ViewProduto();
+        $this->verificaAcao();
+    }
 
     /**
      * Realiza alterações com base no produto selecionado na tabela 
      */
-    public function alterar() {
+    protected function alterar() {
         $this->PersistenciaProduto->setCondicao($_GET['alterar']);
         $select = $this->PersistenciaProduto->select();
         $this->ViewProduto->criarPaginaProdutoAlterar($select);
-        if (isset($_POST['descricao']) and!empty($_POST['preco'])) {
+        if (isset($_POST['descricao']) and !empty($_POST['preco'])) {
             $this->getProduto()->setCodigo($_GET['alterar']);
             $this->getProduto()->setDescricao($_POST['descricao']);
             $this->getProduto()->setPreco($_POST['preco']);
@@ -54,7 +65,7 @@ class ControllerProduto {
     /**
      * Deleta o produto selecionado na tabela 
      */
-    public function deletar() {
+    protected function deletar() {
         $this->ViewProduto->criarPaginaProdutoCadastrar();
         $this->getProduto()->setCodigo($_GET['deletar']);
         $this->PersistenciaProduto->delete($this->Produto);
@@ -63,9 +74,9 @@ class ControllerProduto {
     /**
      * Realiza cadastro do Produto com seus respectivos valores
      */
-    public function cadastrar() {
+    protected function cadastrar() {
         $this->ViewProduto->criarPaginaProdutoCadastrar();
-        if (isset($_POST['descricao']) and!empty($_POST['preco'])) {
+        if (isset($_POST['descricao']) and !empty($_POST['preco'])) {
             $this->getProduto()->setDescricao($_POST['descricao']);
             $this->getProduto()->setPreco($_POST['preco']);
             $this->PersistenciaProduto->insert($this->Produto);
@@ -110,17 +121,6 @@ class ControllerProduto {
                 $this->cadastrar();
                 break;
         }
-    }
-
-    /**
-     * Realiza o Processamento dos dados e verifica qual ação execultar.
-     */
-    public function processarDados() {
-        $oProduto = new ModelProduto();
-        $this->setProduto($oProduto);
-        $this->PersistenciaProduto = new PersistenciaProduto();
-        $this->ViewProduto = new ViewProduto();
-        $this->verificaAcao();
     }
 
 }

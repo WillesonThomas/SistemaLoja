@@ -11,8 +11,8 @@ class ViewProduto {
         ModelEstrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewProduto", "Cadastro de Produto");
         ModelEstrutura::criarInput("alertaDescricao", "descricao", "Descricao", "campoDescricao", "text", "50");
         ModelEstrutura::criarInput("alertaPrecoVenda", "preco", "Preco", "campoPrecoVenda", "text", "50");
-        ModelEstrutura::criarBotao("submit", "CADASTRAR", "cadastrarImovel");
-        ModelEstrutura::criarBotao("reset", "LIMPAR", "limparImovel", true);
+        ModelEstrutura::criarBotao("submit", "CADASTRAR", "cadastrar");
+        ModelEstrutura::criarBotao("reset", "LIMPAR", "limpar", true);
     }
 
     /**
@@ -36,10 +36,10 @@ class ViewProduto {
      */
     public function criarPaginaProdutoAlterar($selectProduto) {
         ModelEstrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewProduto&alterar=" . ($_GET['alterar']), "Alterar Produto");
-        ModelEstrutura::criarInput("alertaDescricao", "descricao", "Descrição", "campoDescricao", "text", "50", $selectProduto[0][1]);
-        ModelEstrutura::criarInput("alertaPrecoVenda", "preco", "Preço", "campoPrecoVenda", "text", "50", $selectProduto[0][2]);
-        ModelEstrutura::criarBotao("submit", "ALTERAR", "cadastrarImovel");
-        ModelEstrutura::criarBotao("reset", "LIMPAR", "limparImovel", true);
+        ModelEstrutura::criarInput("alertaDescricao", "descricao", "Descricao", "campoDescricao", "text", "50", $selectProduto[0][1]);
+        ModelEstrutura::criarInput("alertaPrecoVenda", "preco", "Preco", "campoPrecoVenda", "text", "50", $selectProduto[0][2]);
+        ModelEstrutura::criarBotao("submit", "ALTERAR", "cadastrar");
+        ModelEstrutura::criarBotao("reset", "LIMPAR", "limpar", true);
     }
 
     /**
@@ -47,9 +47,9 @@ class ViewProduto {
      * @param Array $selectProduto
      */
     public function criarPaginaProdutoVisualizar($selectProduto) {
-        ModelEstrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewProduto&visualizar=" . ($_GET['visualizar']), "Vizualizar Produto");
-        ModelEstrutura::criarInput("alertaDescricao", "descricao", "Descrição", "campoDescricao", "text", "50", $selectProduto[0][1], true);
-        ModelEstrutura::criarInput("alertaPrecoVenda", "preco", "Preço", "campoPrecoVenda", "text", "50", $selectProduto[0][2], true, true);
+        ModelEstrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewProduto&visualizar=" . ($_GET['visualizar']), "Visualizar Produto");
+        ModelEstrutura::criarInput("alertaDescricao", "descricao", "Descricao", "campoDescricao", "text", "50", $selectProduto[0][1], true);
+        ModelEstrutura::criarInput("alertaPrecoVenda", "preco", "Preco", "campoPrecoVenda", "text", "50", $selectProduto[0][2], true, true);
     }
 
 }

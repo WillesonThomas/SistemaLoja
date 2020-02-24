@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Pagina Inicial Usuario</title>
-        <meta charset="windows-1252">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link href="css/estiloPaginas.css" rel="stylesheet" type="text/css"/>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Pagina Inicial</title>
-        <meta charset="windows-1252">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link href="css/estiloPaginas.css" rel="stylesheet" type="text/css"/>
@@ -19,11 +19,11 @@
                         <img src="imagens/icones/person-icon.png" alt="Avatar" class="avatar">
                     </div>
                     <img src="imagens/icones/error.png" id="alertaUsuario" class="imagemalertasmall"/>
-                    <label for="usuario"><b>Usuario*</b></label>
+                    <label for="usuario"><b>Usuario</b></label>
                     <input id="campoUsuario" type="text" name="usuario" required>
 
                     <img src="imagens/icones/error.png" id="alertaSenha" class="imagemalertasmall"/>
-                    <label for="senha"><b>Senha*</b></label>
+                    <label for="senha"><b>Senha</b></label>
                     <input id="campoSenha" type="password" name="senha" required>
 
                     <hr>

@@ -15,14 +15,14 @@ class ViewDocumentoVenda {
      */
     public function criarPaginaDocumentoVendaCadastrar($iCodigoProduto) {
         ModelEstrutura::criarFormulario("paginaPrincipalUsuario.php?pg=ViewDocumentoVenda", "Cadastro de Venda");
-        ModelEstrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Codigo da Venda", "campoCodigoDocumentoVenda", "text", "11", $iCodigoProduto, false, false, true);
+        ModelEstrutura::criarInput("alertaCodigoDocumentoVenda", "codigoDocumentoVenda", "Numero", "campoCodigoDocumentoVenda", "text", "11", $iCodigoProduto, false, false, true);
         ModelEstrutura::criarInput("alertaCodigoProdutoDocumentoVenda", "codigoProdutoDocumentoVenda", "Codigo", "campoCodigoProdutoDocumentoVenda", "text", "11");
         ModelEstrutura::criarBotao("button", "BUSCAR PRODUTO", "buscarProduto");
         echo '<br>';
         ModelEstrutura::montaTabelaJs();
         echo '<br><br><br><br>';
-        ModelEstrutura::criarBotao("submit", "CONFIRMAR", "cadastrarPessoaImovel");
-        ModelEstrutura::criarBotao("reset", "CANCELAR", "limparImovel", true);
+        ModelEstrutura::criarBotao("submit", "CONFIRMAR", "cadastrar");
+        ModelEstrutura::criarBotao("reset", "CANCELAR", "limpar", true);
     }
 
     /**

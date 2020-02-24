@@ -34,6 +34,17 @@ class ControllerDocumentoVenda {
     }
 
     /**
+     * Realiza o Processamento dos dados e verifica qual ação execultar.
+     */
+    protected function processarDados() {
+        $oDocumentoVenda = new ModelDocumentoVenda();
+        $this->setDocumentoVenda($oDocumentoVenda);
+        $this->PersistenciaDocumentoVenda = new PersistenciaDocumentoVenda();
+        $this->ViewDocumentoVenda = new ViewDocumentoVenda();
+        $this->verificaAcao();
+    }
+
+    /**
      * Realiza atualização da situação do Documento Venda
      */
     protected function cadastrar() {
@@ -71,17 +82,6 @@ class ControllerDocumentoVenda {
                 $this->cadastrar();
                 break;
         }
-    }
-
-    /**
-     * Realiza o Processamento dos dados e verifica qual ação execultar.
-     */
-    protected function processarDados() {
-        $oDocumentoVenda = new ModelDocumentoVenda();
-        $this->setDocumentoVenda($oDocumentoVenda);
-        $this->PersistenciaDocumentoVenda = new PersistenciaDocumentoVenda();
-        $this->ViewDocumentoVenda = new ViewDocumentoVenda();
-        $this->verificaAcao();
     }
 
 }

@@ -190,7 +190,7 @@ class ModelEstrutura {
      */
     public static function criarInput($idAlerta, $name, $label, $idCampo, $typeCampo, $tamanhoMax, $value = false, $desabilitar = false, $verifica = false, $readOnly = false) {
         echo '<img src="imagens/icones/error.png" id="' . $idAlerta . '" class="imagemalertasmall"/>'
-        . '<label for="' . $name . '"><b>' . $label . '*</b></label>';
+        . '<label for="' . $name . '"><b>' . $label . '</b></label>';
         if ($desabilitar) {
             echo '<input id="' . $idCampo . '" type="' . $typeCampo . '" name="' . $name . '" maxlength="' . $tamanhoMax . '" value="' . $value . '" disabled required>';
         } else {
@@ -289,12 +289,10 @@ class ModelEstrutura {
 
         foreach ($dados as $oLinha) {
             echo '<tr>';
-            $iDeletar = 0;
             $iAlterar = 0;
             $iVizualizar = 0;
             foreach ($oLinha as $index => $value) {
                 if ($index == 0) {
-                    $iDeletar = $value;
                     $iAlterar = $value;
                     $iVizualizar = $value;
                 }
@@ -302,8 +300,6 @@ class ModelEstrutura {
             }
             if (!$verificaAcao) {
                 echo '<td><a href="paginaPrincipalUsuario.php?pg=' . ($_GET['pg']) .
-                '&deletar=' . $iDeletar . '"><img class="iconesacoes" src="imagens/icones/delete-icon.png" style="width:25px;height:25px"></a>';
-                echo '<a href="paginaPrincipalUsuario.php?pg=' . ($_GET['pg']) .
                 '&alterar=' . $iAlterar . '"><img style="height:30px; padding-top:5px" class="iconesacoes" src="imagens/icones/pencil-icon.png" style="width:25px;height:25px"></a>';
                 echo '<a href="paginaPrincipalUsuario.php?pg=' . ($_GET['pg']) .
                 '&visualizar=' . $iVizualizar . '"><img class="iconesacoes" src="imagens/icones/eye-icon.png" style="width:25px;height:25px"></a>';

@@ -31,7 +31,7 @@ class ControllerUsuario {
     /**
      * Realiza o Processamento dos dados e verifica qual ação execultar.
      */
-    public function processarDados() {
+    protected function processarDados() {
         $oUsuario = new ModelUsuario();
         $this->setUsuario($oUsuario);
         $this->getUsuario()->setUsuario($_POST['usuario']);
@@ -43,7 +43,7 @@ class ControllerUsuario {
     /**
      * Realiza Validação dos dados para efetuar login
      */
-    public function validarLogin() {
+    protected function validarLogin() {
         $select = $this->PersistenciaUsuario->select();
         foreach ($select as $value) {
             if ($value[1] == $this->getUsuario()->getUsuario() and $value[2] == $this->getUsuario()->getSenha()) {
