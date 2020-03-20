@@ -1,17 +1,21 @@
 # SistemaLoja
+
+## Descri√ß√£o da Aplica√ß√£o
 Desenvolvimento de sistema para gerenciamento de vendas de loja
 
-ConsideraÁıes para o correto funcionamento do sistema:
--Criar Banco de Dados utilizando MySQL com o sript presente no arquivo "SistemaLojaSQL.sql"
--Configurar os dados para conex„o com o banco no arquivo "configuracao.xml"
+## Executar Aplica√ß√£o
+
+Considera√ß√µes para o correto funcionamento do sistema:
+* Criar Banco de Dados utilizando MySQL com o sript presente no arquivo "SistemaLojaSQL.sql"
+* Configurar os dados para conex√£o com o banco no arquivo "configuracao.xml"
 
 Usuarios:
--Com base nos cen·rios para o desenvolvimento do presente sistema, criou-se dois tipos de usu·rio:
+* Com base nos cen√°rios para o desenvolvimento do presente sistema, criou-se dois tipos de usu√°rio:
 
 Usuario administrador: tem acesso a todas as funcionalidades do sistema.
-Usuario: adm
-Senha: 123
+* Usuario: adm
+* Senha: 123
 
-Usuario Vendedor: tem acesso apenas as funÁıes de cadastro de vendas e visualizaÁ„o dos produtos.
-Usuario: vend
-Senha: 456
+Usuario Vendedor: tem acesso apenas as fun√ß√µes de cadastro de vendas e visualiza√ß√£o dos produtos.
+* Usuario: vend
+* Senha: 456
