@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!--Pagina de Login-->
+<!--Pagina inicial a executar do projeto-->
 <html>
     <head>
         <title>Pagina Inicial</title>
